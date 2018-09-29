@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/new'
   root 'static_pages#home'
   #get '/home',to: 'static_pages/home' No longer to need since already set root 'static_pages#home'
 
@@ -12,5 +11,11 @@ Rails.application.routes.draw do
   #ユーザー登録用URLを初期値の/users/newから変更する。
   post '/signup',to: 'users#create'
   #User登録後に/usersではなく送信前と同じ/signupに行く
+  get '/login',to: 'sessions#new'
+  #GET login_path： "/login"へアクセスされた際に"session#new"アクションを実行
+  post '/login',to: 'sessions#create'
+  #POST login_path： "session#create"アクションの情報を"/login"へ送信。
+  delete '/logout',to: 'sessions#destroy'
+
   resources :users
 end

@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     #Strong parameterの使用前の引数は(params[:user])
     if @user.save
+      log_in @user
+      #登録後自動でログインされる
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
       #= redirect_to user_url(@user) 送信に成功したらRenderではない。
