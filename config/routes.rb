@@ -10,4 +10,7 @@ Rails.application.routes.draw do
 
   get '/signup',to: 'users#new'
   #ユーザー登録用URLを初期値の/users/newから変更する。
+  post '/signup',to: 'users#create'
+  #User登録後に/usersではなく送信前と同じ/signupに行く
+  resources :users
 end
