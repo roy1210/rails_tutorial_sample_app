@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   #get '/home',to: 'static_pages/home' No longer to need since already set root 'static_pages#home'
 
   get '/help',to: 'static_pages#help',as:'helf'
-  #演習5.3.3.1 help=>helfルーティング への名前変更　link_to "Help",helf_path　となる。
+  #演習5.3.3.1 help=>helfルーティング への名前変更 link_to "Help",helf_path　となる。
   get '/about',to: 'static_pages#about'
   get '/contact',to: 'static_pages#contact'
 
