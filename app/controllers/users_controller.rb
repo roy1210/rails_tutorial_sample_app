@@ -15,11 +15,10 @@ class UsersController < ApplicationController
    @user = User.new(user_params)
     #Strong parameterの使用前の引数は(params[:user])
     if @user.save
-      log_in @user
-      #登録後自動でログインされる
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
-      #= redirect_to user_url(@user) 送信に成功したらRenderではない。
+      @user.send_activation_email
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
+      #=送信に成功したらRenderではない。
     else
       render 'new'
     end
@@ -34,8 +33,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -75,5 +72,5 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_url) unless current_user.admin?
-  end  
+  end
 end
